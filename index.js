@@ -3,7 +3,7 @@ const axios = require('axios');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Advice Slip endpoint (existing)
+// Advice Slip endpoint
 app.get('/advice', async (req, res) => {
   try {
     const response = await axios.get('http://api.adviceslip.com/advice');
@@ -13,19 +13,6 @@ app.get('/advice', async (req, res) => {
   } catch (error) {
     res.set('Content-Type', 'text/plain');
     res.send('Chill, something broke. Try again!');
-  }
-});
-
-// Yo Mama endpoint
-app.get('/yomama', async (req, res) => {
-  try {
-    const response = await axios.get('https://api.yomama.info');
-    const joke = response.data.joke;
-    res.set('Content-Type', 'text/plain');
-    res.send(joke);
-  } catch (error) {
-    res.set('Content-Type', 'text/plain');
-    res.send('Yo mama so broke, she can’t even afford a comeback!');
   }
 });
 
@@ -39,6 +26,19 @@ app.get('/uselessfact', async (req, res) => {
   } catch (error) {
     res.set('Content-Type', 'text/plain');
     res.send('Fact machine’s jammed, try later!');
+  }
+});
+
+// Truth or Dare (Dare) endpoint
+app.get('/dare', async (req, res) => {
+  try {
+    const response = await axios.get('https://api.truthordarebot.xyz/v1/dare');
+    const dare = response.data.question;
+    res.set('Content-Type', 'text/plain');
+    res.send(dare);
+  } catch (error) {
+    res.set('Content-Type', 'text/plain');
+    res.send('Dare ya to try again—something broke!');
   }
 });
 
