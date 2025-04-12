@@ -55,4 +55,17 @@ app.get('/riddle', async (req, res) => {
   }
 });
 
+// Kanye Quote endpoint
+app.get('/kanye', async (req, res) => {
+  try {
+    const response = await axios.get('https://api.kanye.rest/');
+    const quote = response.data.quote;
+    res.set('Content-Type', 'text/plain');
+    res.send(quote);
+  } catch (error) {
+    res.set('Content-Type', 'text/plain');
+    res.send('Ye’s quiet—try again!');
+  }
+});
+
 app.listen(port, () => console.log(`Running on port ${port}`));
