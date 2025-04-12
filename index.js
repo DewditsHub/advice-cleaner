@@ -42,4 +42,17 @@ app.get('/dare', async (req, res) => {
   }
 });
 
+// Riddle endpoint
+app.get('/riddle', async (req, res) => {
+  try {
+    const response = await axios.get('https://riddles-api.vercel.app/random');
+    const riddle = response.data.riddle;
+    res.set('Content-Type', 'text/plain');
+    res.send(riddle);
+  } catch (error) {
+    res.set('Content-Type', 'text/plain');
+    res.send('Riddle me this: try again later!');
+  }
+});
+
 app.listen(port, () => console.log(`Running on port ${port}`));
