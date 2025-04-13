@@ -68,4 +68,17 @@ app.get('/kanye', async (req, res) => {
   }
 });
 
+// Ron Swanson Quote endpoint
+app.get('/ronswanson', async (req, res) => {
+  try {
+    const response = await axios.get('https://ron-swanson-quotes.herokuapp.com/v2/quotes');
+    const quote = response.data[0]; // Extract first quote from array
+    res.set('Content-Type', 'text/plain');
+    res.send(quote);
+  } catch (error) {
+    res.set('Content-Type', 'text/plain');
+    res.send('Ron’s out fishing—try again!');
+  }
+});
+
 app.listen(port, () => console.log(`Running on port ${port}`));
